@@ -33,25 +33,25 @@ def splitCsv(args):
         if (not line.strip()):
             continue
 
-        columes = map(str.strip, line.split(args.d))
+        columns = map(str.strip, line.split(args.d))
 
-        columeNdx = 0
+        columnNdx = 0
         inputLine = ''
         outputLine = ''
-        for colume in columes:
-            if (columeNdx != labelNdx):
-                inputLine += colume + ','
+        for column in columns:
+            if (columnNdx != labelNdx):
+                inputLine += column + ','
             else:
-                if (isInt(headers[columeNdx])):
-                    outputLine += str(colume)
+                if (isInt(headers[columnNdx])):
+                    outputLine += str(column)
                 else:
-                    if colume in classes:
-                        outputLine += str(classes[colume])
+                    if column in classes:
+                        outputLine += str(classes[column])
                     else:
-                        classes[colume] = len(classes)
-                        outputLine += str(classes[colume])
+                        classes[column] = len(classes)
+                        outputLine += str(classes[column])
                 
-            columeNdx += 1
+            columnNdx += 1
 
         inputLine = inputLine[:-1] #remove last ,
 
@@ -154,7 +154,7 @@ def main(argv):
   
       parser.add_argument('csv', help='CSV to convert.')
       parser.add_argument('--header', default='', help='File containing csv header. Will use first line of CSV if not provided.')
-      parser.add_argument('--label', required=True, help='Label for colume being used as truth value.')
+      parser.add_argument('--label', required=True, help='Label for column being used as truth value.')
       parser.add_argument('--name', default='', help='Name to add to beginning of the files generated. Optional.')
       parser.add_argument('-d', default=',', help='Demilimeter for csv. Defaults to \',\'.')    
       parser.add_argument('-s', default='80/20', help='Train to split ratio. Defaults to 80/20.')

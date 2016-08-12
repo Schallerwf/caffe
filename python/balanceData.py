@@ -30,7 +30,7 @@ def main(argv):
       parser = argparse.ArgumentParser()
   
       parser.add_argument('csv', help='CSV to balance')
-      parser.add_argument('--label', required=True, help='Label for colume being used as truth value.')
+      parser.add_argument('--label', required=True, help='Label for column being used as truth value.')
       parser.add_argument('-d', default=',', help='Demilimeter for csv. Defaults to \',\'.')   
       parser.add_argument('-u', default='1', help='The value of the unbalanced class. Defaults to 1.')
       parser.add_argument('-w', default='14', help='Number of times to multiply the unbalanced class.') # In my case I have 1 to 14 positive to negative samples
