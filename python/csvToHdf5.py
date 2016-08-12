@@ -42,7 +42,7 @@ def splitCsv(args):
             if (columnNdx != labelNdx):
                 inputLine += column + ','
             else:
-                if (isInt(headers[columnNdx])):
+                if (isInt(column)):
                     outputLine += str(column)
                 else:
                     if column in classes:
@@ -100,13 +100,21 @@ def genHdf5(args, numFeatures):
     testData['input'] = np.reshape(testFeatures, (len(testOutput),1,1,numFeatures-1))
     testData['output'] = testTargets
 
-    with h5py.File('train.hdf5', 'w') as f:
+    with h5py.File(args.name + 'train.hdf5', 'w') as f:
         f['data'] = trainData['input'].astype(np.float32)
         f['label'] = trainData['output'].astype(np.float32)
 
-    with h5py.File('test.hdf5', 'w') as f:
+    with h5py.File(args.name + 'test.hdf5', 'w') as f:
         f['data'] = testData['input'].astype(np.float32)
         f['label'] = testData['output'].astype(np.float32)
+
+    trainTxt = open(args.name + 'train.txt', 'w')
+    trainTxt.write(args.name + 'train.hdf5')
+    trainTxt.close()
+
+    testTxt = open(args.name + 'test.txt', 'w')
+    testTxt.write(args.name + 'test.hdf5')
+    testTxt.close()
 
 def isInt(s):
     try:
